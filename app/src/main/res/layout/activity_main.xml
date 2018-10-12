@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.since85stas.level3.view.MainActivity">
 
+
     <include
         layout="@layout/activity_main_screen"
         android:layout_width="match_parent"
