@@ -20,6 +20,7 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView> {
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         mRepositoriesModel = new RepositoriesModel();
+        getViewState().updateRepoList(mRepositoriesModel.getList());
         Log.d("UserDetailPresenter", "first attach");
     }
 

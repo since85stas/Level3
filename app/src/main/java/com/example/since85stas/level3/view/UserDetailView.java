@@ -5,6 +5,7 @@ import com.arellomobile.mvp.MvpView;
 
 
 public interface UserDetailView extends MvpView {
+    
     void setUserInfoText(String s);
 
     void setEmailText (String s)  ;

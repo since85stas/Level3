@@ -18,4 +18,9 @@ public class RepositoriesModel {
         mList.add("third program");
     }
 
+    public List<String> getList () {
+
+        return mList;
+    }
+
 }

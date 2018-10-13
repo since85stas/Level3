@@ -8,16 +8,19 @@
         android:id="@+id/user_name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sandwich Brodsky"/>
+        android:text="Sandwich Brodsky"
+        style="@style/textCommonStyle"/>
     <TextView
         android:id="@+id/user_email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="lettersFromRomanFriend@gmail.com"/>
+        android:text="lettersFromRomanFriend@gmail.com"
+        style="@style/textCommonStyle"/>
     <Button
         android:id="@+id/get_information"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Get info"/>
+        android:text="Get info"
+        style="@style/textCommonStyle"/>
 
 </LinearLayout>
