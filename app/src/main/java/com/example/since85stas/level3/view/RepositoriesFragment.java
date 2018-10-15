@@ -40,13 +40,15 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        //CharSequence s;
+        //
         View rootView = inflater.inflate(R.layout.repositories_list,container,false);
 
+        // определяем recycleview
         recyclerViewm = rootView.findViewById(R.id.repositories_recycle_view);
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerViewm.setLayoutManager(manager);
 
+        // определяем поиск
         search = rootView.findViewById(R.id.search_edit_text);
 
         // попытка сделать что-то с Rx, но пока не до конца разобрался
