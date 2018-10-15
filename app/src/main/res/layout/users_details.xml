@@ -4,18 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+    <ProgressBar
+        android:id="@+id/loadingView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminate="true"
+        android:visibility="gone" />
+
     <TextView
         android:id="@+id/user_name_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sandwich Brodsky"
         style="@style/textCommonStyle"/>
+    <ImageView
+        android:id="@+id/avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp" />
     <TextView
         android:id="@+id/user_email_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="lettersFromRomanFriend@gmail.com"
         style="@style/textCommonStyle"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Repos"
+            style="@style/textCommonStyle"/>
+        <TextView
+            android:id="@+id/num_repos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            style="@style/textCommonStyle"
+            />
+
+    </LinearLayout>
     <Button
         android:id="@+id/get_information"
         android:layout_width="match_parent"
