@@ -1,6 +1,8 @@
 package com.example.since85stas.level3.presenter;
 
 import android.util.Log;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -8,27 +10,35 @@ import com.example.since85stas.level3.data.RepositoriesModel;
 import com.example.since85stas.level3.data.rest.NetApiClient;
 import com.example.since85stas.level3.view.RepositoriesView;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * Created by seeyo on 11.10.2018.
+ * Created by seeyou on 11.10.2018.
  */
 
 @InjectViewState
 public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
-        implements Observer<List<RepositoriesModel>> {
+        implements Observer<List<RepositoriesModel>> , Filterable {
 
     private RepositoriesModel mRepositoriesModel;
+
+    private List<RepositoriesModel>  data;
+
+    private String search;
+
+    public void setSearch(String search) {
+        this.search = search;
+    }
 
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         mRepositoriesModel = new RepositoriesModel();
-        getViewState().updateRepoList(mRepositoriesModel.getList());
+        //getViewState().updateRepoList(mRepositoriesModel.getList());
         //loadDate();
         Log.d("UserDetailPresenter", "first attach");
     }
@@ -47,7 +57,9 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
 
     @Override
     public void onNext(List<RepositoriesModel> list) {
+        data = list;
         Log.d("RepPr", "onNext: " + "rrr");
+        getViewState().updateRepoList(data);
     }
 
     private void loadDate() {
@@ -65,4 +77,44 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
     public void onComplete() {
         getViewState().finishLoad();
     }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                data = (List<RepositoriesModel>) results.values;
+                getViewState().updateRepoList(data);
+                //notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<RepositoriesModel> filteredResults = null;
+                if (constraint.length() == 0) {
+                    filteredResults = data;
+                } else {
+                    filteredResults = getFilteredResults(constraint.toString().toLowerCase());
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredResults;
+
+                return results;
+            }
+
+            protected List<RepositoriesModel> getFilteredResults(String constraint) {
+                List<RepositoriesModel> results = new ArrayList<>();
+
+                for (RepositoriesModel item : data) {
+                    if (item.getName().toLowerCase().contains(constraint)) {
+                        results.add(item);
+                    }
+                }
+                return results;
+            }
+        };
+    }
+
 }

@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.example.since85stas.level3.R;
+import com.example.since85stas.level3.data.RepositoriesModel;
 import com.example.since85stas.level3.presenter.RepositoriesPresenter;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
@@ -65,7 +66,9 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
         // попытка сделать что-то с Rx, но пока не до конца разобрался
         RxTextView.textChanges(search)
                 .subscribe(charSequence -> {
-                    //adapter.getFilter().filter(charSequence);
+                    if (search != null) {
+                        mRepositoriesPresenter.getFilter().filter(charSequence.toString());
+                    }
                     Log.d("dbg", "onCreateView: " + search);
                 });
 
@@ -76,17 +79,21 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
 
 
     @Override
-    public void updateRepoList(List<String> data) {
+    public void updateRepoList(List<RepositoriesModel> data) {
 
-        adapter = new RepositoriesAdapter(getActivity(),data);
+        if (data != null) {
+            adapter = new RepositoriesAdapter(getActivity(), data);
 //        this.data = data;
-        recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
+        }
 
 //        adapter.swap(data);
 
         //adapter.notifyDataSetChanged();
         //adapter.getFilter().filter("first");
     }
+
+    // метод возвращает строку из поиска
 
     @Override
     public void showError(Throwable e) {
