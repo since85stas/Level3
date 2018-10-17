@@ -60,6 +60,6 @@ public class UserDetailFragment extends MvpAppCompatFragment implements UserDeta
 
     @Override
     public void setEmailText(String s) {
-        email.setText(s);
+            email.setText(s);
     }
 }

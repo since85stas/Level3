@@ -4,9 +4,15 @@
     <group android:id="@+id/notesGroupNew" android:checkableBehavior="single" >
         <item
             android:orderInCategory="0"
-            android:id="@+id/nav_main"
+            android:id="@+id/nav_user"
             android:icon="@mipmap/ic_launcher"
-            android:title="Home" />
+            android:title="User details" />
+
+        <item
+            android:orderInCategory="0"
+            android:id="@+id/nav_repositories"
+            android:icon="@mipmap/ic_launcher"
+            android:title="Repositories" />
     </group>
 
 </menu>
