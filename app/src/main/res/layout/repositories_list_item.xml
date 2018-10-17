@@ -10,26 +10,26 @@
         android:id="@+id/repository_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/textCommonStyle"/>
+        style="@style/textBoldStyle"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="commits"
-        style="@style/textCommonStyle"/>
+        style="@style/textBoldStyle"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="branches"
-        style="@style/textCommonStyle"/>
+        style="@style/textBoldStyle"/>
 
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="last updated"
-        style="@style/textCommonStyle"/>
+        style="@style/textBoldStyle"/>
 </LinearLayout>

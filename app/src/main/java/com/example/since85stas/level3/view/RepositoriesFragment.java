@@ -88,5 +88,18 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
         //adapter.getFilter().filter("first");
     }
 
+    @Override
+    public void showError(Throwable e) {
 
+    }
+
+    @Override
+    public void startLoad() {
+
+    }
+
+    @Override
+    public void finishLoad() {
+
+    }
 }

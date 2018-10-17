@@ -8,4 +8,10 @@ import java.util.List;
 
 public interface RepositoriesView extends MvpView {
     void updateRepoList(List<String> data);
+
+    void showError(Throwable e);
+
+    void startLoad();
+
+    void finishLoad();
 }

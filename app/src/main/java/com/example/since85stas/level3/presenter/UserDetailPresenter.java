@@ -24,27 +24,18 @@ public class UserDetailPresenter extends MvpPresenter<UserDetailView>
         super.onFirstViewAttach();
         mUserDetailModel = new UserDetailModel();
         Log.d("UserDetailPresenter", "first attach");
-        loadDate();
+        //loadDate();
     }
 
     @Override
     public void attachView(UserDetailView view) {
         super.attachView(view);
         Log.d("UserDetailPresenter", "attach view");
-        loadDate();
-    }
-
-    private String getNewUserInfo(int modelElementIndex) {
-        String currentValue = mUserDetailModel.getElementValueAtIndex(modelElementIndex);
-        return currentValue + " !";
+        //loadDate();
     }
 
     public void buttonClick() {
-        mUserDetailModel.setElementValueAtIndex(0, getNewUserInfo(0));
-        mUserDetailModel.setElementValueAtIndex(1, getNewUserInfo(1));
-        //getViewState().setUserInfoText(getNewUserInfo(0));
-        getViewState().setEmailText(getNewUserInfo(1));
-
+        loadDate();
     }
 
     private void loadDate() {
@@ -60,7 +51,6 @@ public class UserDetailPresenter extends MvpPresenter<UserDetailView>
 
     @Override
     public void onNext(UserDetailModel githubUser) {
-//        getViewState().setImage(githubUser.getAvatar());
         getViewState().setUserInfoText(githubUser.getLogin());
         getViewState().setImage(githubUser.getAvatar());
         getViewState().setReposNumber(githubUser.getPublic_repos());

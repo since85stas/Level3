@@ -15,6 +15,11 @@ public interface Endpoints {
     Observable<UserDetailModel> getUser(
             @Path("user") String user);
 
-    @GET("/repositories")
-    Flowable<List<RepositoriesModel>> getRepos();
+    @GET("/users/{user}/repos")
+    Observable<List<RepositoriesModel>> getRepos(
+            @Path("user") String user);
+
+//    @GET("/repositories")
+//    Observable<List<RepositoriesModel>> getRepos(
+//            );
 }

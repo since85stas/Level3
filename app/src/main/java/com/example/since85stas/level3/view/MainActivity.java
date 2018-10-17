@@ -44,9 +44,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar mToolbar;
     private String[] activityTitles = {"User detail", "Repositories"};
 
-    /* Фрагменты пока задал через разметку, но подозреваю что это плохо,
-       потом то переделую по нормальному :)
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,17 +63,15 @@ public class MainActivity extends AppCompatActivity {
         TextView txtWebsite = (TextView) mNavHeader.findViewById(R.id.website);
         ImageView imgNavHeaderBg = (ImageView) mNavHeader.findViewById(R.id.img_header_bg);
         ImageView imgProfile = (ImageView) mNavHeader.findViewById(R.id.img_profile);
+
         // name, website
         txtName.setText("Stanislav Batura");
         txtWebsite.setText("stanislav.batura85@gmail.com");
 
-        //imgNavHeaderBg.setImageResource(R.drawable.before_cookie);
-        //imgNavHeaderBg.setImageResource(R.drawable.drawer_back);
-        Glide.with(this).load(R.drawable.drawer_back).into(imgNavHeaderBg);
-
-        Glide.with(this).load(R.drawable.cat_portrait_cute_animal)
-                .bitmapTransform(new CircleTransform(this))
-                .into(imgProfile);
+//        Glide.with(this).load(R.drawable.drawer_back).into(imgNavHeaderBg);
+//        Glide.with(this).load(R.drawable.cat_portrait_cute_animal)
+//                .bitmapTransform(new CircleTransform(this))
+//                .into(imgProfile);
         //loadNavHeader();
 
         // set view logic
@@ -87,7 +82,6 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_USER;
             loadHomeFragment();
         }
-
     }
 
     private void loadNavHeader() {
@@ -200,17 +194,27 @@ public class MainActivity extends AppCompatActivity {
         // when switching between navigation menus
         // So using runnable, the fragment is loaded with cross fade effect
         // This effect can be seen in GMail app
-        Runnable mPendingRunnable = new Runnable() {
-            @Override
-            public void run() {
-                // update the main content by replacing fragments
-                MvpAppCompatFragment fragment = getHomeFragment();
-                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-                        android.R.anim.fade_out);
-                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-                fragmentTransaction.commitAllowingStateLoss();
-            }
+//        Runnable mPendingRunnable = new Runnable() {
+//            @Override
+//            public void run() {
+//                // update the main content by replacing fragments
+//                MvpAppCompatFragment fragment = getHomeFragment();
+//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+//                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+//                        android.R.anim.fade_out);
+//                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+//                fragmentTransaction.commitAllowingStateLoss();
+//            }
+//        };
+
+        Runnable  mPendingRunnable = () -> {
+            // update the main content by replacing fragments
+            MvpAppCompatFragment fragment = getHomeFragment();
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
+                    android.R.anim.fade_out);
+            fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
+            fragmentTransaction.commitAllowingStateLoss();
         };
 
         // If mPendingRunnable is not null, then add to the message queue

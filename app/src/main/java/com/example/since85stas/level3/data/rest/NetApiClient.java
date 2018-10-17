@@ -32,9 +32,12 @@ public class NetApiClient {
                 .subscribeOn(Schedulers.io());
     }
 
-    public Flowable<List<RepositoriesModel>> getReps(){
-        return netApi.getRepos()
+    public Observable<List<RepositoriesModel>> getReps(String user){
+
+        Observable<List<RepositoriesModel>> observable  =  netApi.getRepos(user)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io());
+
+        return observable;
     }
 }

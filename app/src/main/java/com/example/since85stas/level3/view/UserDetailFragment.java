@@ -49,19 +49,10 @@ public class UserDetailFragment extends MvpAppCompatFragment implements UserDeta
         avtar         = rootView.findViewById(R.id.avatar);
         numRepos      = rootView.findViewById(R.id.num_repos);
 
-//        getInfoButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                mUserDetailPresenter.buttonClick();
-//            }
-//        });
-
-        getInfoButton.setOnClickListener(view -> {mUserDetailPresenter.buttonClick();});
-
+        getInfoButton.setOnClickListener( view -> { mUserDetailPresenter.buttonClick(); });
         return rootView;
     }
 
-    // пока особой логики нет,по нажатию кнопки меняем текст, на значение из модели и добавляем '!'
     @Override
     public void setUserInfoText(String s) {
         userName.setText(s);

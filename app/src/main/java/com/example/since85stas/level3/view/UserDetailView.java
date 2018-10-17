@@ -21,6 +21,7 @@ public interface UserDetailView extends MvpView {
     void showError(Throwable e);
 
     void startLoad();
+
     void finishLoad();
 }
 
