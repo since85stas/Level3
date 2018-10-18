@@ -1,5 +1,7 @@
 package com.example.since85stas.level3.data;
 
+import android.support.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,13 +11,38 @@ import java.util.List;
 
 public class RepositoriesModel {
 
+    String name ;
+    String description;
+    String updated_at;
+    String size;
+
     private List<String> mList;
 
     public RepositoriesModel() {
-        mList = new ArrayList<>(3);
-        mList.add("first program");
-        mList.add("second program");
-        mList.add("third program");
     }
 
+    public List<String> getList () {
+
+        return mList;
+    }
+
+    @Nullable
+    public String getName() {
+        return name;
+    }
+
+    @Nullable
+    public String getDescription() {
+        return description;
+    }
+
+    @Nullable
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    @Nullable
+    public String getSize() {
+        return size;
+    }
 }

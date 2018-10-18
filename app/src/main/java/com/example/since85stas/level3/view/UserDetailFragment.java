@@ -7,11 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.bumptech.glide.Glide;
 import com.example.since85stas.level3.R;
 import com.example.since85stas.level3.presenter.UserDetailPresenter;
 
@@ -24,6 +26,8 @@ public class UserDetailFragment extends MvpAppCompatFragment implements UserDeta
     private Button getInfoButton;
     TextView userName ;
     TextView email;
+    ImageView avtar;
+    TextView numRepos;
 
     @InjectPresenter
     UserDetailPresenter mUserDetailPresenter;
@@ -42,17 +46,13 @@ public class UserDetailFragment extends MvpAppCompatFragment implements UserDeta
         getInfoButton = rootView.findViewById(R.id.get_information);
         userName      = rootView.findViewById(R.id.user_name_text);
         email         = rootView.findViewById(R.id.user_email_text);
+        avtar         = rootView.findViewById(R.id.avatar);
+        numRepos      = rootView.findViewById(R.id.num_repos);
 
-        getInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mUserDetailPresenter.buttonClick();
-            }
-        });
+        getInfoButton.setOnClickListener( view -> { mUserDetailPresenter.buttonClick(); });
         return rootView;
     }
 
-    // пока особой логики нет,по нажатию кнопки меняем текст, на значение из модели и добавляем '!'
     @Override
     public void setUserInfoText(String s) {
         userName.setText(s);
@@ -60,6 +60,33 @@ public class UserDetailFragment extends MvpAppCompatFragment implements UserDeta
 
     @Override
     public void setEmailText(String s) {
-        email.setText(s);
+            email.setText(s);
+    }
+
+    @Override
+    public void setImage(String imageUrl) {
+        Glide.with(this)
+                .load(imageUrl)
+                .into(avtar);
+    }
+
+    @Override
+    public void setReposNumber(String s) {
+        numRepos.setText(s);
+    }
+
+    @Override
+    public void showError(Throwable e) {
+
+    }
+
+    @Override
+    public void startLoad() {
+
+    }
+
+    @Override
+    public void finishLoad() {
+
     }
 }

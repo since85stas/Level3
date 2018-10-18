@@ -2,8 +2,17 @@ package com.example.since85stas.level3.view;
 
 
 import com.arellomobile.mvp.MvpView;
+import com.example.since85stas.level3.data.RepositoriesModel;
+
+import java.util.List;
 
 
 public interface RepositoriesView extends MvpView {
-    void updateRepoList(int btnIndex, int value);
+    void updateRepoList(List<RepositoriesModel> data);
+
+    void showError(Throwable e);
+
+    void startLoad();
+
+    void finishLoad();
 }
