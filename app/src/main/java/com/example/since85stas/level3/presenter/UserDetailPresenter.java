@@ -24,14 +24,12 @@ public class UserDetailPresenter extends MvpPresenter<UserDetailView>
         super.onFirstViewAttach();
         mUserDetailModel = new UserDetailModel();
         Log.d("UserDetailPresenter", "first attach");
-        //loadDate();
     }
 
     @Override
     public void attachView(UserDetailView view) {
         super.attachView(view);
         Log.d("UserDetailPresenter", "attach view");
-        //loadDate();
     }
 
     public void buttonClick() {

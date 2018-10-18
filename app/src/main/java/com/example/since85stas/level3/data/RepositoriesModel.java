@@ -19,10 +19,6 @@ public class RepositoriesModel {
     private List<String> mList;
 
     public RepositoriesModel() {
-        mList = new ArrayList<>(3);
-        mList.add("first program");
-        mList.add("second program");
-        mList.add("third program");
     }
 
     public List<String> getList () {

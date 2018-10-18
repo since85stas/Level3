@@ -68,11 +68,11 @@ public class MainActivity extends AppCompatActivity {
         txtName.setText("Stanislav Batura");
         txtWebsite.setText("stanislav.batura85@gmail.com");
 
-//        Glide.with(this).load(R.drawable.drawer_back).into(imgNavHeaderBg);
-//        Glide.with(this).load(R.drawable.cat_portrait_cute_animal)
-//                .bitmapTransform(new CircleTransform(this))
-//                .into(imgProfile);
-        //loadNavHeader();
+        Glide.with(this).load(R.drawable.drawer_back).into(imgNavHeaderBg);
+
+        Glide.with(this).load(R.drawable.cat_portrait_cute_animal)
+                .bitmapTransform(new CircleTransform(this))
+                .into(imgProfile);
 
         // set view logic
         setUpNavigationView();
@@ -82,29 +82,6 @@ public class MainActivity extends AppCompatActivity {
             CURRENT_TAG = TAG_USER;
             loadHomeFragment();
         }
-    }
-
-    private void loadNavHeader() {
-
-        // Navigation view header
-        mNavHeader = mNavigationView.getHeaderView(0);
-        TextView txtName = (TextView) mNavHeader.findViewById(R.id.name);
-        TextView txtWebsite = (TextView) mNavHeader.findViewById(R.id.website);
-        ImageView imgNavHeaderBg = (ImageView) mNavHeader.findViewById(R.id.img_header_bg);
-        ImageView imgProfile = (ImageView) mNavHeader.findViewById(R.id.img_profile);
-        // name, website
-        txtName.setText("Stanislav Batura");
-        txtWebsite.setText("stanislav.batura85@gmail.com");
-
-        //imgNavHeaderBg.setImageResource(R.drawable.before_cookie);
-        //imgNavHeaderBg.setImageResource(R.drawable.drawer_back);
-        Glide.with(this).load(R.drawable.drawer_back).into(imgNavHeaderBg);
-
-        Glide.with(this).load(R.drawable.cat_portrait_cute_animal)
-                .bitmapTransform(new CircleTransform(this))
-                .into(imgProfile);
-
-        //mNavigationView.geth
     }
 
     // настраиваем NavigationDrawer
@@ -162,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
         actionBarDrawerToggle.syncState();
     }
 
-
     @Override
     public void onBackPressed() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
@@ -189,23 +165,6 @@ public class MainActivity extends AppCompatActivity {
             mDrawerLayout.closeDrawers();
             return;
         }
-
-        // Sometimes, when fragment has huge data, screen seems hanging
-        // when switching between navigation menus
-        // So using runnable, the fragment is loaded with cross fade effect
-        // This effect can be seen in GMail app
-//        Runnable mPendingRunnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                // update the main content by replacing fragments
-//                MvpAppCompatFragment fragment = getHomeFragment();
-//                FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-//                fragmentTransaction.setCustomAnimations(android.R.anim.fade_in,
-//                        android.R.anim.fade_out);
-//                fragmentTransaction.replace(R.id.frame, fragment, CURRENT_TAG);
-//                fragmentTransaction.commitAllowingStateLoss();
-//            }
-//        };
 
         Runnable  mPendingRunnable = () -> {
             // update the main content by replacing fragments

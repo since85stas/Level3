@@ -38,8 +38,6 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
         mRepositoriesModel = new RepositoriesModel();
-        //getViewState().updateRepoList(mRepositoriesModel.getList());
-        //loadDate();
         Log.d("UserDetailPresenter", "first attach");
     }
 
@@ -78,14 +76,16 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
         getViewState().finishLoad();
     }
 
+    // пока поиск сделан только по имени репозитория
     @Override
     public Filter getFilter() {
         return new Filter() {
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-                data = (List<RepositoriesModel>) results.values;
-                getViewState().updateRepoList(data);
+                List<RepositoriesModel> newData = (List<RepositoriesModel>) results.values;
+                //data = (List<RepositoriesModel>) results.values;
+                getViewState().updateRepoList(newData);
                 //notifyDataSetChanged();
             }
 

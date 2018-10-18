@@ -23,18 +23,12 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- *    Здесь я конечно немного запутался, где определять adapter, определил пока в updateRepoList
- *    так как там мы передаем наши данные, но тогда возникает вопрос с фильтрацией результата
- *    из editText, где делать его?  пока не могу понять как правильно
  */
 
 public class RepositoriesFragment extends MvpAppCompatFragment implements RepositoriesView {
 
     RecyclerView recyclerView;
     RepositoriesAdapter adapter;
-
-//    List<String> data  = Collections.emptyList();
-
     EditText search;
 
     public RepositoriesFragment() {
@@ -57,43 +51,29 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
         RecyclerView.LayoutManager manager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(manager);
 
-//        adapter = new RepositoriesAdapter(getActivity(),data);
-//        recyclerView.setAdapter(adapter);
-
         // определяем поиск
         search = rootView.findViewById(R.id.search_edit_text);
 
-        // попытка сделать что-то с Rx, но пока не до конца разобрался
+        // попытка сделать что-то с Rx, не знаю так наверное не правильно,
+        // когда обращаемся к презентеру?
         RxTextView.textChanges(search)
                 .subscribe(charSequence -> {
-                    if (search != null) {
+                    if (search != null || search.length() != 0) {
                         mRepositoriesPresenter.getFilter().filter(charSequence.toString());
                     }
                     Log.d("dbg", "onCreateView: " + search);
                 });
-
-        //adapter.getFilter().filter("first");
-
         return rootView;
     }
 
 
     @Override
     public void updateRepoList(List<RepositoriesModel> data) {
-
         if (data != null) {
             adapter = new RepositoriesAdapter(getActivity(), data);
-//        this.data = data;
             recyclerView.setAdapter(adapter);
         }
-
-//        adapter.swap(data);
-
-        //adapter.notifyDataSetChanged();
-        //adapter.getFilter().filter("first");
     }
-
-    // метод возвращает строку из поиска
 
     @Override
     public void showError(Throwable e) {

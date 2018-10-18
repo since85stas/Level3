@@ -18,7 +18,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class RepositoriesAdapter extends RecyclerView.Adapter<RepositoriesAdapter.RepositoriesViewHolder>
-        implements Filterable {
+        {
 
     class RepositoriesViewHolder extends RecyclerView.ViewHolder {
 
@@ -76,54 +76,6 @@ public class RepositoriesAdapter extends RecyclerView.Adapter<RepositoriesAdapte
         return data.size();
     }
 
-    public void swap(List<RepositoriesModel> datas)
-    {
-        if(datas == null || datas.size()==0)
-            return;
-        if (data != null && data.size()>0)
-            data.clear();
-        data.addAll(datas);
-        notifyDataSetChanged();
-    }
-
-    // добавляем метод ля фильтра RecycleView пока сделано для случая когда передаем String
-    @Override
-    public Filter getFilter() {
-        return new Filter() {
-            @SuppressWarnings("unchecked")
-            @Override
-            protected void publishResults(CharSequence constraint, FilterResults results) {
-                data = (List<RepositoriesModel>) results.values;
-                notifyDataSetChanged();
-            }
-
-            @Override
-            protected FilterResults performFiltering(CharSequence constraint) {
-                RepositoriesModel filteredResults = null;
-                if (constraint.length() == 0) {
-                    //filteredResults = data;
-                } else {
-                    //filteredResults = getFilteredResults(constraint.toString().toLowerCase());
-                }
-
-                FilterResults results = new FilterResults();
-                results.values = filteredResults;
-
-                return results;
-            }
-
-            protected List<String> getFilteredResults(String constraint) {
-                List<String> results = new ArrayList<>();
-
-//                for (String item : data) {
-//                    if (item.toLowerCase().contains(constraint)) {
-//                        results.add(item);
-//                    }
-//                }
-                return results;
-            }
-        };
-    }
 }
 
 
