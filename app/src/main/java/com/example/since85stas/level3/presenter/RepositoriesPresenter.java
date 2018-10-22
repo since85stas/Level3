@@ -110,7 +110,6 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
         long timeSqlLoad = timeFinal - timeInit;
 
         saveRepoToRealmDb(listFromDb);
-
         getViewState().updateRepoList(listFromDb,String.valueOf(timeSqlLoad),SQL_CASE);
         return String.valueOf(timeSqlLoad);
     }
