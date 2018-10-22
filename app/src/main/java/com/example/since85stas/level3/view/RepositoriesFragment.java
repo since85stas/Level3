@@ -95,7 +95,7 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
 
         Button getFromRealmButton = rootView.findViewById(R.id.from_realm_button);
         timeRealmText = rootView.findViewById(R.id.realm_time);
-        getFromRealmButton.setOnClickListener(view -> mRepositoriesPresenter.);
+        getFromRealmButton.setOnClickListener(view -> mRepositoriesPresenter.loadFromRealmDb());
         return rootView;
     }
 
@@ -145,8 +145,9 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
 
     @Override
     public void finishLoad() {
-        Toast toast = new Toast ( getContext() );
-        toast.setText("Finish load");
-        toast.show();
+        Toast.makeText(getContext(),
+                "Load finish",
+                Toast.LENGTH_SHORT).show();
+
     }
 }

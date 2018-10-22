@@ -108,9 +108,9 @@ public class GitDataSourse {
 
     private RepositoriesModel cursorToModel(Cursor cursor) {
         RepositoriesModel rep = new RepositoriesModel();
-        rep.setName(cursor.getString(0));
-        rep.setDescription(cursor.getString(1));
-        rep.setUpdated_at(cursor.getString(2));
+        rep.setName(cursor.getString(1));
+        rep.setDescription(cursor.getString(2));
+        rep.setUpdated_at(cursor.getString(3));
         return rep;
     }
 

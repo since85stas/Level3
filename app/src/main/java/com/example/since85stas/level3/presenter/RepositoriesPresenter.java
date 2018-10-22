@@ -19,6 +19,7 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -118,6 +119,10 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
 
         // инициализируем realm
         mRealm = Realm.getInstance(contex);
+        mRealm.beginTransaction();
+        mRealm.clear(GitObj.class);
+        mRealm.commitTransaction();
+
         for (int i = 0; i < list.size(); i++) {
             mRealm.beginTransaction();
             GitObj obj = mRealm.createObject(GitObj.class);
@@ -137,16 +142,21 @@ public class RepositoriesPresenter extends MvpPresenter<RepositoriesView>
         mRealm.beginTransaction();
         RealmResults<GitObj> results = mRealm.allObjects(GitObj.class);
 
-        //List<RepositoriesModel> listFromRealm ;
+        List<RepositoriesModel> listFromRealm = new ArrayList<RepositoriesModel>();;
         if (!results.isEmpty()) {
             for (int i = 0; i < results.size(); i++) {
-                //listFromRealm.add(results.get(i).toRepModel());
+                GitObj obj = results.get(i);
+                RepositoriesModel model = new RepositoriesModel();
+                model.setName(obj.getName());
+                model.setDescription(obj.getDescr());
+                model.setUpdated_at(obj.getUpdate_at());
+                listFromRealm.add(model);
             }
         }
         mRealm.close();
         long timeFinish = Calendar.getInstance().getTimeInMillis();
         long time = timeFinish - timeInit;
-        //getViewState().updateRepoList(listFromRealm, String.valueOf(time), REALM_CASE );
+        getViewState().updateRepoList(listFromRealm, String.valueOf(time), REALM_CASE );
     }
 
     private void loadFromDb() {

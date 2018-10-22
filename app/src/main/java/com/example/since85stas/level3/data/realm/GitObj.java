@@ -32,20 +32,17 @@ public class GitObj extends RealmObject {
         this.update_at = update_at;
     }
 
-    public RepositoriesModel toRepModel () {
-        RepositoriesModel model = new RepositoriesModel();
-        model.setName(name);
-        model.setDescription(descr);
-        model.setUpdated_at(update_at);
-        return model;
+    public String getName() {
+        return name;
     }
 
-    public void saveList(List<RepositoriesModel> list) {
-
+    public String getDescr() {
+        return descr;
     }
 
-    public void saveRepItem (RepositoriesModel model) {
-
-
+    public String getUpdate_at() {
+        return update_at;
     }
+
+
 }
