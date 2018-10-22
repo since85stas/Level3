@@ -9,17 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
+import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.since85stas.level3.R;
 import com.example.since85stas.level3.data.RepositoriesModel;
 import com.example.since85stas.level3.presenter.RepositoriesPresenter;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,8 +30,22 @@ import java.util.List;
 public class RepositoriesFragment extends MvpAppCompatFragment implements RepositoriesView {
 
     RecyclerView recyclerView;
+
+    @Override
+    public void saveToDb() {
+
+    }
+
+    @Override
+    public void loadFromDb() {
+
+    }
+
     RepositoriesAdapter adapter;
     EditText search;
+    TextView timeSqlText;
+    TextView timeNetText;
+    TextView timeRealmText;
 
     public RepositoriesFragment() {
 
@@ -37,6 +53,11 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
 
     @InjectPresenter
     RepositoriesPresenter mRepositoriesPresenter;
+
+    @ProvidePresenter
+    RepositoriesPresenter mRepositoriesPresenter() {
+        return new RepositoriesPresenter(getContext().getApplicationContext());
+    }
 
     @Nullable
     @Override
@@ -63,16 +84,53 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
                     }
                     Log.d("dbg", "onCreateView: " + search);
                 });
+
+        Button getFromNet      = rootView.findViewById(R.id.from_net_button);
+        timeNetText            = rootView.findViewById(R.id.net_time);
+        getFromNet.setOnClickListener(view -> mRepositoriesPresenter.loadDate());
+
+        Button getFromSqlButton = rootView.findViewById(R.id.from_sql_button);
+        timeSqlText             = rootView.findViewById(R.id.sql_time);
+        getFromSqlButton.setOnClickListener( view -> mRepositoriesPresenter.loadFromSql());
+
+        Button getFromRealmButton = rootView.findViewById(R.id.from_realm_button);
+        timeRealmText = rootView.findViewById(R.id.realm_time);
+        getFromRealmButton.setOnClickListener(view -> mRepositoriesPresenter.loadFromRealmDb());
         return rootView;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
 
     @Override
-    public void updateRepoList(List<RepositoriesModel> data) {
+    public void updateRepoList(List<RepositoriesModel> data, String time, int dbType) {
         if (data != null) {
             adapter = new RepositoriesAdapter(getActivity(), data);
             recyclerView.setAdapter(adapter);
         }
+
+        if (time != null) {
+            switch (dbType) {
+                // на сколько правильно использовать такие константы ?
+                case RepositoriesPresenter.SQL_CASE:
+                    timeSqlText.setText(time);
+                    break;
+                case RepositoriesPresenter.REALM_CASE:
+                    timeRealmText.setText(time);
+                    break;
+            }
+        }
+    }
+
+    @Override
+    public void updateRepoListFiltrable(List<RepositoriesModel> data) {
+        if (data != null) {
+            adapter = new RepositoriesAdapter(getActivity(), data);
+            recyclerView.setAdapter(adapter);
+        }
+
     }
 
     @Override
@@ -87,6 +145,9 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
 
     @Override
     public void finishLoad() {
+        Toast.makeText(getContext(),
+                "Load finish",
+                Toast.LENGTH_SHORT).show();
 
     }
 }

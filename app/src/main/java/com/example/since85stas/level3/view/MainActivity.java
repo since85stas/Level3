@@ -131,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 super.onDrawerOpened(drawerView);
             }
         };
-
         //Setting the actionbarToggle to drawer layout
         mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
 
