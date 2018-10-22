@@ -20,11 +20,8 @@ import com.arellomobile.mvp.presenter.ProvidePresenter;
 import com.example.since85stas.level3.R;
 import com.example.since85stas.level3.data.RepositoriesModel;
 import com.example.since85stas.level3.presenter.RepositoriesPresenter;
-import com.jakewharton.rxbinding.widget.RxCompoundButton;
 import com.jakewharton.rxbinding.widget.RxTextView;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -48,6 +45,7 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
     EditText search;
     TextView timeSqlText;
     TextView timeNetText;
+    TextView timeRealmText;
 
     public RepositoriesFragment() {
 
@@ -94,6 +92,10 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
         Button getFromSqlButton = rootView.findViewById(R.id.from_sql_button);
         timeSqlText             = rootView.findViewById(R.id.sql_time);
         getFromSqlButton.setOnClickListener( view -> mRepositoriesPresenter.loadFromSql());
+
+        Button getFromRealmButton = rootView.findViewById(R.id.from_realm_button);
+        timeRealmText = rootView.findViewById(R.id.realm_time);
+        getFromRealmButton.setOnClickListener(view -> mRepositoriesPresenter.);
         return rootView;
     }
 
@@ -103,15 +105,32 @@ public class RepositoriesFragment extends MvpAppCompatFragment implements Reposi
     }
 
     @Override
-    public void updateRepoList(List<RepositoriesModel> data, String time) {
+    public void updateRepoList(List<RepositoriesModel> data, String time, int dbType) {
         if (data != null) {
             adapter = new RepositoriesAdapter(getActivity(), data);
             recyclerView.setAdapter(adapter);
         }
 
         if (time != null) {
-            timeSqlText.setText(time);
+            switch (dbType) {
+                // на сколько правильно использовать такие константы ?
+                case RepositoriesPresenter.SQL_CASE:
+                    timeSqlText.setText(time);
+                    break;
+                case RepositoriesPresenter.REALM_CASE:
+                    timeRealmText.setText(time);
+                    break;
+            }
         }
+    }
+
+    @Override
+    public void updateRepoListFiltrable(List<RepositoriesModel> data) {
+        if (data != null) {
+            adapter = new RepositoriesAdapter(getActivity(), data);
+            recyclerView.setAdapter(adapter);
+        }
+
     }
 
     @Override

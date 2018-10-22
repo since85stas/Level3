@@ -47,6 +47,25 @@
                 android:text="Time"
                 style="@style/textNormalStyle"/>
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+            <Button
+                android:id="@+id/from_realm_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Get from realm"
+                style="@style/textNormalStyle"/>
+            <TextView
+                android:id="@+id/realm_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Time"
+                style="@style/textNormalStyle"/>
+        </LinearLayout>
     </LinearLayout>
 
     <EditText
